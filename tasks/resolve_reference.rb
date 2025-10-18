@@ -47,12 +47,13 @@ class Terraform < TaskHelper
   # Uses the Terraform CLI to pull remote state files
   def load_remote_statefile(opts)
     dir = File.expand_path(opts[:dir], opts[:_boltdir])
+    tf = opts[:executable]
 
     begin
-      stdout_str, stderr_str, status = Open3.capture3('terraform state pull', chdir: dir)
+      stdout_str, stderr_str, status = Open3.capture3("#{tf} state pull", chdir: dir)
     rescue Errno::ENOENT
       msg = if File.directory?(dir)
-              "Could not find executable 'terraform'"
+              "Could not find executable '#{tf}'"
             else
               "Could not find directory '#{dir}'"
             end

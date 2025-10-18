@@ -20,6 +20,11 @@
     },
     "target_mapping": {
       "type": "Hash"
+    },
+    "executable": {
+      "description": "Executable to use when interacting with terraform project",
+      "type": "String[1]",
+      "default": "terraform"
     }
   },
   "private": true
